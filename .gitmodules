@@ -1,0 +1,3 @@
+[submodule "ShadowMTPSharp"]
+	path = ShadowMTPSharp
+	url = git@github.com:ShadowTheHedgehogHacking/ShadowMTPSharp.git
