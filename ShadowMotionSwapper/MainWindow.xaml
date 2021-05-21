@@ -3,32 +3,58 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ShadowMotionSwapper"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="500">
+        Title="Shadow Motion Swapper v1.0.0" Height="400" Width="433" ResizeMode="CanMinimize">
     <Grid>
-        <Button x:Name="buttonOpenTarget" Content="Open Target" HorizontalAlignment="Left" Margin="51,358,0,0" VerticalAlignment="Top" Height="28" Width="103" Click="buttonOpenTarget_Click"/>
-        <Button x:Name="buttonOpenDonor" Content="Open Donor" HorizontalAlignment="Left" Margin="333,358,0,0" VerticalAlignment="Top" Height="29" Width="109" Click="buttonOpenDonor_Click"/>
-        <Button x:Name="buttonMap" Content="Map" HorizontalAlignment="Left" Margin="217,152,0,0" VerticalAlignment="Top" Height="27" Width="66" Click="buttonMap_Click" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonExport" Content="Export" HorizontalAlignment="Left" Margin="217,330,0,0" VerticalAlignment="Top" Height="40" Width="66" Click="buttonExport_Click" Grid.ColumnSpan="2"/>
-        <ListBox x:Name="listBoxTarget" Margin="14,13,305,88">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
-        </ListBox>
-        <ListBox x:Name="listBoxDonor" Margin="292,14,17,87">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
-        </ListBox>
-        <CheckBox x:Name="checkboxCopyProps" Content="CopyProps" HorizontalAlignment="Left" Margin="200,184,0,0" VerticalAlignment="Top" Height="26" Width="87" Grid.ColumnSpan="2"/>
+        <Grid.Resources >
+            <Style TargetType="Border" >
+                <Setter Property="Padding" Value="5,5,5,5" />
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="320" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="43.968" />
+            <ColumnDefinition Width="126.032"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="0">
+            <ListBox x:Name="listBoxTarget" Height="300" Width="160">
+                <ListBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ListBox.RenderTransform>
+            </ListBox>
+        </Border>
+        <Button x:Name="buttonOpenTarget" Grid.Row="1" Grid.Column="0" Content="Open Target" Height="30" Width="100" Click="buttonOpenTarget_Click" Margin="35,0,35,0"/>
+
+        <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+            <Button x:Name="buttonMap" Content="Map" Height="30" Width="66" Click="buttonMap_Click" />
+            <CheckBox x:Name="checkboxCopyProps" Content="CopyProps" Margin="0,10,0,0" />
+            <CheckBox x:Name="checkboxInfoPopup" Content="InfoPopup" Margin="0,10,0,0" />
+
+        </StackPanel>
+        <Button x:Name="buttonExport" Grid.Row="1" Grid.Column="1" Content="Export" Height="30" Width="66" Click="buttonExport_Click" Margin="6,0,5,0" />
+
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Margin="77,0,0,0">
+            <ListBox x:Name="listBoxDonor" Height="300" Width="160">
+                <ListBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ListBox.RenderTransform>
+            </ListBox>
+        </Border>
+        <Button x:Name="buttonOpenDonor" Grid.Row="1" Grid.Column="2" Content="Open Donor" Height="30" Width="100" Click="buttonOpenDonor_Click" Grid.ColumnSpan="2" Margin="35,0,35,0"/>
     </Grid>
 </Window>

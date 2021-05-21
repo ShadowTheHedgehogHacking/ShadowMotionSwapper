@@ -4,6 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Authors>dreamsyntax</Authors>
+    <Company>ShadowTheHedgehogHacking</Company>
+    <Copyright>2021</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

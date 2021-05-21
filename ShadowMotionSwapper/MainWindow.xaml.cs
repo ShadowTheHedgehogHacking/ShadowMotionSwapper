@@ -38,12 +38,18 @@ namespace ShadowMotionSwapper {
             // TODO: Add additional conditionals to allow:
             // - Copy name from donor (generally bad idea)
             
+
             if (checkboxCopyProps.IsChecked == true) {
+                if (checkboxInfoPopup.IsChecked == true) {
+                    MessageBox.Show("REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND used props from " + donorEntry.FileName);
+                }
                 targetPackage.Entries[listBoxTarget.SelectedIndex] = new ManagedAnimationEntry(targetEntry.FileName, donorEntry.FileData, donorEntry.Tuples);
             } else {
+                    if (checkboxInfoPopup.IsChecked == true) {
+                    MessageBox.Show("REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND kept props from " + targetEntry.FileName);
+                }
                 targetPackage.Entries[listBoxTarget.SelectedIndex] = new ManagedAnimationEntry(targetEntry.FileName, donorEntry.FileData, targetEntry.Tuples);
             }
-
 
             displayTargetPackage.Refresh();
         }
