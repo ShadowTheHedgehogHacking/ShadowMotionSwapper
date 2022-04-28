@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MTPLib;
 
 namespace ShadowMotionSwapper {
@@ -24,6 +13,8 @@ namespace ShadowMotionSwapper {
 
         MotionPackage targetPackage, donorPackage;
         ICollectionView displayTargetPackage, displayDonorPackage;
+        Window swapLog;
+        string log;
 
         public MainWindow() {
             InitializeComponent();
@@ -37,20 +28,20 @@ namespace ShadowMotionSwapper {
 
             // TODO: Add additional conditionals to allow:
             // - Copy name from donor (generally bad idea)
-            
+
 
             if (checkboxCopyProps.IsChecked == true) {
-                if (checkboxInfoPopup.IsChecked == true) {
-                    MessageBox.Show("REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND used props from " + donorEntry.FileName);
-                }
+                log += "REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND used props from " + donorEntry.FileName + "\n\n";
                 targetPackage.Entries[listBoxTarget.SelectedIndex] = new ManagedAnimationEntry(targetEntry.FileName, donorEntry.FileData, donorEntry.Tuples);
             } else {
-                    if (checkboxInfoPopup.IsChecked == true) {
-                    MessageBox.Show("REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND kept props from " + targetEntry.FileName);
-                }
+                log += "REPLACED " + targetEntry.FileName + "\nWITH " + donorEntry.FileName + "\nAND kept props from " + targetEntry.FileName + "\n\n";
                 targetPackage.Entries[listBoxTarget.SelectedIndex] = new ManagedAnimationEntry(targetEntry.FileName, donorEntry.FileData, targetEntry.Tuples);
             }
-
+            if (swapLog != null)
+            {
+                TextBox tB = (TextBox)swapLog.FindName("TextBox_SwapLog");
+                tB.Text = log;
+            }
             displayTargetPackage.Refresh();
         }
 
@@ -64,6 +55,23 @@ namespace ShadowMotionSwapper {
             if (dialog.FileName != "") {
                 File.WriteAllBytes(dialog.FileName, targetPackage.ToMtp());
             }
+        }
+
+        private void buttonSwapLog_Click(object sender, RoutedEventArgs e)
+        {
+            if (swapLog == null)
+                swapLog = new SwapLog(log);
+            swapLog.Show();
+        }
+
+        private void buttonResetLog_Click(object sender, RoutedEventArgs e)
+        {
+            if (swapLog != null)
+            {
+                TextBox tB = (TextBox)swapLog.FindName("TextBox_SwapLog");
+                tB.Text = "";
+            }
+            log = "";
         }
 
         private void buttonOpenTarget_Click(object sender, RoutedEventArgs e) {
