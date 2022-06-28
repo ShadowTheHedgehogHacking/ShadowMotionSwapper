@@ -79,15 +79,45 @@ namespace ShadowMotionSwapper {
             Application.Current.Shutdown();
         }
 
+        private void buttonReplaceWithFileImport_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBoxTarget.SelectedIndex == -1)
+                return;
+            var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog
+            {
+                Filter = "Motion file (*.mtn)|*.mtn|All files (*.*)|*.*"
+            };
+            if (dialog.ShowDialog() == false)
+            {
+                return;
+            }
+            if (!dialog.FileName.ToLower().EndsWith(".mtn"))
+            {
+                MessageBox.Show("Pick a 'MTN' file", "Try Again");
+                return;
+            }
+            var donorData = File.ReadAllBytes(dialog.FileName);
+            
+            var targetEntry = targetPackage.Entries[listBoxTarget.SelectedIndex];
+            log += "REPLACED " + targetEntry.FileName + "\nWITH " + dialog.FileName + "\nAND kept props from " + targetEntry.FileName + "\n\n";
+            targetPackage.Entries[listBoxTarget.SelectedIndex] = new ManagedAnimationEntry(targetEntry.FileName, donorData, targetEntry.Tuples);
+            if (swapLog != null)
+            {
+                TextBox tB = (TextBox)swapLog.FindName("TextBox_SwapLog");
+                tB.Text = log;
+            }
+            displayTargetPackage.Refresh();
+        }
+
         private void buttonOpenTarget_Click(object sender, RoutedEventArgs e) {
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
-                Filter = "Motion files (*.mtp)|*.mtp|All files (*.*)|*.*"
+                Filter = "MotionPack files (*.mtp)|*.mtp|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == false) {
                 return;
             }
             if (!dialog.FileName.ToLower().EndsWith(".mtp")) {
-                MessageBox.Show("Pick an 'MTP' file", "Try Again");
+                MessageBox.Show("Pick a 'MTP' file", "Try Again");
                 return;
             }
             var data = File.ReadAllBytes(dialog.FileName);
@@ -98,13 +128,13 @@ namespace ShadowMotionSwapper {
 
         private void buttonOpenDonor_Click(object sender, RoutedEventArgs e) {
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
-                Filter = "Motion files (*.mtp)|*.mtp|All files (*.*)|*.*"
+                Filter = "MotionPack files (*.mtp)|*.mtp|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == false) {
                 return;
             }
             if (!dialog.FileName.ToLower().EndsWith(".mtp")) {
-                MessageBox.Show("Pick an 'MTP' file", "Try Again");
+                MessageBox.Show("Pick a 'MTP' file", "Try Again");
                 return;
             }
             var data = File.ReadAllBytes(dialog.FileName);
