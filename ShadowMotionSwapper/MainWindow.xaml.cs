@@ -74,6 +74,11 @@ namespace ShadowMotionSwapper {
             log = "";
         }
 
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
         private void buttonOpenTarget_Click(object sender, RoutedEventArgs e) {
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
                 Filter = "Motion files (*.mtp)|*.mtp|All files (*.*)|*.*"

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShadowMotionSwapper"
         mc:Ignorable="d"
-        Title="Map Log" Height="300" Width="300">
+        Title="Map Log" Height="300" Width="300" Closing="Window_Closing">
     <Grid>
         <TextBox x:Name="TextBox_SwapLog" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">No changes yet</TextBox>
     </Grid>
