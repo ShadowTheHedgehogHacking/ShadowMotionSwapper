@@ -14,6 +14,7 @@ Simple program to accelerate making "Custom BON" type Character Mods from swappi
 ## Features:
 * Ability to keep original properties of a MTN or replace props with the replacement MTN. This can be toggled per MTN.
 * No files are modified until Export is pressed- This acts as "Save As".
+* Replace a MTP's MTN entry with a .MTN not packed within another MTP ("Replace..." button) 
 * Log window to easily save history of edits for later
 
 ## Credits:
