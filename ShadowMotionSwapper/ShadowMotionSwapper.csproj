@@ -8,7 +8,7 @@
     <Authors>dreamsyntax</Authors>
     <Company>ShadowTheHedgehogHacking</Company>
     <Copyright>2021-2022</Copyright>
-    <Version>$(VersionPrefix)1.2.0</Version>
+    <Version>$(VersionPrefix)1.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

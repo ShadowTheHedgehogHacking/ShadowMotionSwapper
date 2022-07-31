@@ -48,7 +48,10 @@ namespace ShadowMotionSwapper {
         private void buttonExport_Click(object sender, RoutedEventArgs e) {
             if (targetPackage == null)
                 return;
-            var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog();
+            var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog()
+            {
+                DefaultExt = ".MTP"
+            };
             if (dialog.ShowDialog() == false) {
                 return;
             }
@@ -85,7 +88,7 @@ namespace ShadowMotionSwapper {
                 return;
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog
             {
-                Filter = "Motion file (*.mtn)|*.mtn|All files (*.*)|*.*"
+                Filter = "Motion file (*.MTN)|*.MTN|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == false)
             {
@@ -109,9 +112,27 @@ namespace ShadowMotionSwapper {
             displayTargetPackage.Refresh();
         }
 
+        private void buttonExtract_Click(object sender, RoutedEventArgs e)
+        {
+            if (listBoxTarget.SelectedIndex == -1)
+                return;
+            var targetEntry = targetPackage.Entries[listBoxTarget.SelectedIndex];
+            var dialog = new Ookii.Dialogs.Wpf.VistaSaveFileDialog
+            {
+                DefaultExt = ".MTN",
+                Filter = "Motion file (*.MTN)|*.MTN|All files (*.*)|*.*",
+                FileName = targetEntry.FileName
+            };
+            if (dialog.ShowDialog() == false)
+            {
+                return;
+            }
+            File.WriteAllBytes(dialog.FileName, targetEntry.FileData);
+        }
+
         private void buttonOpenTarget_Click(object sender, RoutedEventArgs e) {
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
-                Filter = "MotionPack files (*.mtp)|*.mtp|All files (*.*)|*.*"
+                Filter = "MotionPack files (*.MTP)|*.MTP|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == false) {
                 return;
@@ -128,7 +149,7 @@ namespace ShadowMotionSwapper {
 
         private void buttonOpenDonor_Click(object sender, RoutedEventArgs e) {
             var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog {
-                Filter = "MotionPack files (*.mtp)|*.mtp|All files (*.*)|*.*"
+                Filter = "MotionPack files (*.MTP)|*.MTP|All files (*.*)|*.*"
             };
             if (dialog.ShowDialog() == false) {
                 return;
