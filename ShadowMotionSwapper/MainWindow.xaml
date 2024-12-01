@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Shadow Motion Swapper v1.3.0" Height="400" Width="433" ResizeMode="CanMinimize" Closing="Window_Closing">
+        Title="Shadow Motion Swapper v1.5.0" Height="400" Width="433" ResizeMode="CanMinimize" Closing="Window_Closing">
     <Grid>
         <Grid.Resources >
             <Style TargetType="Border" >
